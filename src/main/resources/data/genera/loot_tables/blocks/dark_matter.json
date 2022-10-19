@@ -2,10 +2,11 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0.0,
+      "rolls": 1.0,
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "genera:tempera_shard",
           "functions": [
             {
               "add": false,
@@ -20,15 +21,10 @@
               "enchantment": "minecraft:fortune",
               "formula": "minecraft:ore_drops",
               "function": "minecraft:apply_bonus"
-            },
-            {
-              "function": "minecraft:explosion_decay"
             }
-          ],
-          "name": "minecraft:tempera_shard"
+          ]
         }
-      ],
-      "rolls": 1.0
+      ]
     }
   ]
 }
