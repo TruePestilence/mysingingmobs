@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "genera:tempera_block"}
+  ],
+  "result": {
+    "item": "genera:tempera_shard",
+    "count": 9
+  }
+}
