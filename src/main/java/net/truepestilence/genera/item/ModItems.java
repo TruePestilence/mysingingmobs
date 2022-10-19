@@ -15,7 +15,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.GENERA_TAB)));
 
     public static final RegistryObject<Item> TEMPERA_STONE = ITEMS.register("tempera_stone",
-            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.GENERA_TAB)));
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.GENERA_TAB).stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
