@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "msm:frozium"
+    }
+  },
+  "result": {
+    "item": "msm:frozium_block"
+  }
+}

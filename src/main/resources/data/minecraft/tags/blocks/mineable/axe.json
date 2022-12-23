@@ -79,6 +79,7 @@
     "#minecraft:wooden_slabs",
     "#minecraft:wooden_stairs",
     "#minecraft:wooden_trapdoors",
-    "minecraft:mangrove_roots"
+    "minecraft:mangrove_roots",
+    "msm:breeding_structure"
   ]
 }

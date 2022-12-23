@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "msm:block/deepslate_skylite_ore"
+  }
+}

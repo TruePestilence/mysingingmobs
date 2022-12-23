@@ -11,6 +11,21 @@
     "minecraft:gold_ore",
     "minecraft:deepslate_gold_ore",
     "minecraft:redstone_ore",
-    "minecraft:deepslate_redstone_ore"
+    "minecraft:deepslate_redstone_ore",
+    "msm:vegidia_ore",
+    "msm:deepslate_vegidia_ore",
+    "msm:vegidia_block",
+    "msm:frozium_ore",
+    "msm:deepslate_frozium_ore",
+    "msm:frozium_block",
+    "msm:skylite_ore",
+    "msm:deepslate_skylite_ore",
+    "msm:skylite_block",
+    "msm:aquanine_ore",
+    "msm:deepslate_aquanine_ore",
+    "msm:aquanine_block",
+    "msm:stonyx_ore",
+    "msm:deepslate_stonyx_ore",
+    "msm:stonyx_block"
   ]
 }

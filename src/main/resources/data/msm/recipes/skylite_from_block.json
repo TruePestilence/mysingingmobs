@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "msm:skylite_block"}
+  ],
+  "result": {
+    "item": "msm:skylite",
+    "count": 9
+  }
+}

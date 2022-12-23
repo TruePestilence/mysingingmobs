@@ -1,0 +1,33 @@
+{
+  "item.msm.vegidia": "Vegidia",
+  "item.msm.frozium": "Frozium",
+  "item.msm.skylite": "Skylite",
+  "item.msm.aquanine": "Aquanine",
+  "item.msm.stonyx": "Stonyx",
+
+  "item.msm.krystillium": "Krystillium",
+
+  "block.msm.vegidia_block": "Vegidia Block",
+  "block.msm.vegidia_ore": "Vegidia Ore",
+  "block.msm.deepslate_vegidia_ore": "Deepslate Vegidia Ore",
+
+  "block.msm.frozium_block": "Frozium Block",
+  "block.msm.frozium_ore": "Frozium Ore",
+  "block.msm.deepslate_frozium_ore": "Deepslate Frozium Ore",
+
+  "block.msm.skylite_block": "Skylite Block",
+  "block.msm.skylite_ore": "Skylite Ore",
+  "block.msm.deepslate_skylite_ore": "Deepslate Skylite Ore",
+
+  "block.msm.aquanine_block": "Aquanine Block",
+  "block.msm.aquanine_ore": "Aquanine Ore",
+  "block.msm.deepslate_aquanine_ore": "Deepslate Aquanine Ore",
+
+  "block.msm.stonyx_block": "Stonyx Block",
+  "block.msm.stonyx_ore": "Stonyx Ore",
+  "block.msm.deepslate_stonyx_ore": "Deepslate Stonyx Ore",
+
+  "block.msm.breeding_structure": "Breeding Structure",
+
+  "itemGroup.msmtab": "My Singing Mod"
+}
