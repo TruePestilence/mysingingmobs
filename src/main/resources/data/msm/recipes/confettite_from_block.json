@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "msm:confettite_block"}
+  ],
+  "result": {
+    "item": "msm:confettite",
+    "count": 9
+  }
+}

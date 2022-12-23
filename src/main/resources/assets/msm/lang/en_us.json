@@ -4,6 +4,12 @@
   "item.msm.skylite": "Skylite",
   "item.msm.aquanine": "Aquanine",
   "item.msm.stonyx": "Stonyx",
+  "item.msm.pyrozite": "Pyrozite",
+
+  "item.msm.confettite": "Confettite",
+  "item.msm.nebulox": "Nebulox",
+  "item.msm.aurorium": "Aurorium",
+  "item.msm.quarritz": "Quarritz",
 
   "item.msm.krystillium": "Krystillium",
 
@@ -26,6 +32,16 @@
   "block.msm.stonyx_block": "Stonyx Block",
   "block.msm.stonyx_ore": "Stonyx Ore",
   "block.msm.deepslate_stonyx_ore": "Deepslate Stonyx Ore",
+
+  "block.msm.pyrozite_block": "Pyrozite Block",
+  "block.msm.pyrozite_ore": "Pyrozite Ore",
+  "block.msm.deepslate_pyrozite_ore": "Deepslate Pyrozite Ore",
+  "block.msm.nether_pyrozite_ore": "Nether Pyrozite Ore",
+
+  "block.msm.confettite_block": "Confettite Block",
+  "block.msm.nebulox_block": "Nebulox Block",
+  "block.msm.aurorium_block": "Aurorium Block",
+  "block.msm.quarritz_block": "Quarritz Block",
 
   "block.msm.breeding_structure": "Breeding Structure",
 

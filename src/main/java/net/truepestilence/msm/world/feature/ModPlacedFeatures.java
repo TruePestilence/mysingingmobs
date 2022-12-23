@@ -50,5 +50,13 @@ public class ModPlacedFeatures {
             () -> new PlacedFeature(ModConfiguredFeatures.STONYX_ORE.getHolder().get(),
                     commonOrePlacement(8, // VeinsPerChunk
                             HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64)))));
+    public static final RegistryObject<PlacedFeature> OW_PYROZITE_ORE_PLACED = PLACED_FEATURES.register("ow_pyrozite_ore_placed",
+            () -> new PlacedFeature(ModConfiguredFeatures.OW_PYROZITE_ORE.getHolder().get(),
+                    commonOrePlacement(2, // VeinsPerChunk
+                            HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(0)))));
+    public static final RegistryObject<PlacedFeature> N_PYROZITE_ORE_PLACED = PLACED_FEATURES.register("n_pyrozite_ore_placed",
+            () -> new PlacedFeature(ModConfiguredFeatures.N_PYROZITE_ORE.getHolder().get(),
+                    commonOrePlacement(8, // VeinsPerChunk
+                            HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64)))));
 
 }

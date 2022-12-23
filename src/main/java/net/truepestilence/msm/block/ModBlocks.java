@@ -43,6 +43,27 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST)
                     .strength(5.0F,5.0F).requiresCorrectToolForDrops()),
             ModCreativeModeTab.MSM_TAB);
+    public static final RegistryObject<Block> PYROZITE_BLOCK = registerBlock("pyrozite_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST)
+                    .strength(5.0F,5.0F).requiresCorrectToolForDrops()),
+            ModCreativeModeTab.MSM_TAB);
+
+    public static final RegistryObject<Block> CONFETTITE_BLOCK = registerBlock("confettite_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST)
+                    .strength(5.0F,5.0F).requiresCorrectToolForDrops()),
+            ModCreativeModeTab.MSM_TAB);
+    public static final RegistryObject<Block> NEBULOX_BLOCK = registerBlock("nebulox_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST)
+                    .strength(5.0F,5.0F).requiresCorrectToolForDrops()),
+            ModCreativeModeTab.MSM_TAB);
+    public static final RegistryObject<Block> AURORIUM_BLOCK = registerBlock("aurorium_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST)
+                    .strength(5.0F,5.0F).requiresCorrectToolForDrops()),
+            ModCreativeModeTab.MSM_TAB);
+    public static final RegistryObject<Block> QUARRITZ_BLOCK = registerBlock("quarritz_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST)
+                    .strength(5.0F,5.0F).requiresCorrectToolForDrops()),
+            ModCreativeModeTab.MSM_TAB);
 
     public static final RegistryObject<Block> VEGIDIA_ORE = registerBlock("vegidia_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
@@ -87,6 +108,19 @@ public class ModBlocks {
     public static final RegistryObject<Block> DEEPSLATE_STONYX_ORE = registerBlock("deepslate_stonyx_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(4.5F,4.5F).requiresCorrectToolForDrops(), UniformInt.of(1,4)),
+            ModCreativeModeTab.MSM_TAB);
+
+    public static final RegistryObject<Block> PYROZITE_ORE = registerBlock("pyrozite_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(3.0F,3.0F).requiresCorrectToolForDrops(), UniformInt.of(1,4)),
+            ModCreativeModeTab.MSM_TAB);
+    public static final RegistryObject<Block> DEEPSLATE_PYROZITE_ORE = registerBlock("deepslate_pyrozite_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(4.5F,4.5F).requiresCorrectToolForDrops(), UniformInt.of(1,4)),
+            ModCreativeModeTab.MSM_TAB);
+    public static final RegistryObject<Block> NETHER_PYROZITE_ORE = registerBlock("nether_pyrozite_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(3F,3F).requiresCorrectToolForDrops(), UniformInt.of(1,4)),
             ModCreativeModeTab.MSM_TAB);
 
     public static final RegistryObject<Block> BREEDING_STRUCTURE = registerBlock("breeding_structure",

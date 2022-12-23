@@ -26,6 +26,14 @@
     "msm:aquanine_block",
     "msm:stonyx_ore",
     "msm:deepslate_stonyx_ore",
-    "msm:stonyx_block"
+    "msm:stonyx_block",
+    "msm:pyrozite_ore",
+    "msm:deepslate_pyrozite_ore",
+    "msm:nether_pyrozite_ore",
+    "msm:pyrozite_block",
+    "msm:confettite_block",
+    "msm:nebulox_block",
+    "msm:aurorium_block",
+    "msm:quarritz_block"
   ]
 }

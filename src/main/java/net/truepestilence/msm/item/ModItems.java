@@ -21,6 +21,17 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB)));
     public static final RegistryObject<Item> STONYX = ITEMS.register("stonyx",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB)));
+    public static final RegistryObject<Item> PYROZITE = ITEMS.register("pyrozite",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB)));
+
+    public static final RegistryObject<Item> CONFETTITE = ITEMS.register("confettite",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB)));
+    public static final RegistryObject<Item> NEBULOX = ITEMS.register("nebulox",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB)));
+    public static final RegistryObject<Item> AURORIUM = ITEMS.register("aurorium",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB)));
+    public static final RegistryObject<Item> QUARRITZ = ITEMS.register("quarritz",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB)));
 
     public static final RegistryObject<Item> KRYSTILLIUM = ITEMS.register("krystillium",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB)));

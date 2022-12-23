@@ -38,6 +38,12 @@ public class ModConfiguredFeatures {
     public static final Supplier<List<OreConfiguration.TargetBlockState>> STONYX_ORES = Suppliers.memoize(() -> List.of(
             OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, ModBlocks.STONYX_ORE.get().defaultBlockState()),
             OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_STONYX_ORE.get().defaultBlockState())));
+
+    public static final Supplier<List<OreConfiguration.TargetBlockState>> OW_PYROZITE_ORES = Suppliers.memoize(() -> List.of(
+            OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, ModBlocks.PYROZITE_ORE.get().defaultBlockState()),
+            OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_PYROZITE_ORE.get().defaultBlockState())));
+    public static final Supplier<List<OreConfiguration.TargetBlockState>> N_PYROZITE_ORES = Suppliers.memoize(() -> List.of(
+            OreConfiguration.target(OreFeatures.NETHER_ORE_REPLACEABLES, ModBlocks.NETHER_PYROZITE_ORE.get().defaultBlockState())));
     public static final RegistryObject<ConfiguredFeature<?,?>> VEGIDIA_ORE = CONFIGURED_FEATURES.register("vegidia_ore",
             () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(VEGIDIA_ORES.get(),4)));
     public static final RegistryObject<ConfiguredFeature<?,?>> FROZIUM_ORE = CONFIGURED_FEATURES.register("frozium_ore",
@@ -48,4 +54,9 @@ public class ModConfiguredFeatures {
             () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(AQUANINE_ORES.get(),4)));
     public static final RegistryObject<ConfiguredFeature<?,?>> STONYX_ORE = CONFIGURED_FEATURES.register("stonyx_ore",
             () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(STONYX_ORES.get(),4)));
+
+    public static final RegistryObject<ConfiguredFeature<?,?>> OW_PYROZITE_ORE = CONFIGURED_FEATURES.register("ow_pyrozite_ore",
+            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(OW_PYROZITE_ORES.get(),4)));
+    public static final RegistryObject<ConfiguredFeature<?,?>> N_PYROZITE_ORE = CONFIGURED_FEATURES.register("n_pyrozite_ore",
+            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(N_PYROZITE_ORES.get(),4)));
 }
