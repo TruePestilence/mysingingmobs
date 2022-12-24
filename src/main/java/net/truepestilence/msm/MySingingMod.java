@@ -15,6 +15,7 @@ import net.truepestilence.msm.block.ModBlocks;
 import net.truepestilence.msm.block.entity.ModBlockEntities;
 import net.truepestilence.msm.item.ModItems;
 import net.truepestilence.msm.networking.ModNetworking;
+import net.truepestilence.msm.recipe.ModRecipes;
 import net.truepestilence.msm.screen.BreedingStructureScreen;
 import net.truepestilence.msm.screen.ModMenuTypes;
 import net.truepestilence.msm.world.feature.ModConfiguredFeatures;
@@ -41,6 +42,7 @@ public class MySingingMod
         ModPlacedFeatures.register(modEventBus);
 
         ModMenuTypes.register(modEventBus);
+        ModRecipes.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);

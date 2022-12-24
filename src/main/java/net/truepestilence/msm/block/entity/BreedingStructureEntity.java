@@ -21,9 +21,13 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.truepestilence.msm.item.ModItems;
+import net.truepestilence.msm.recipe.BreedingStructureRecipe;
 import net.truepestilence.msm.screen.BreedingStructureMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 public class BreedingStructureEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
@@ -140,15 +144,17 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
     }
 
     private static boolean hasRecipe(BreedingStructureEntity entity) {
+        Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
-        for(int i = 0; i < entity.itemHandler.getSlots(); i++) {
+        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        boolean hasEggInFirstSlot = entity.itemHandler.getStackInSlot(0).getItem() == ModItems.VEGIDIA.get();
+        Optional<BreedingStructureRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(BreedingStructureRecipe.Type.INSTANCE, inventory, level);
 
-        return hasEggInFirstSlot && canInsertAmount(inventory) &&
-                canInsertItem(inventory, new ItemStack(ModItems.VEGIDIA.get(), 0));
+        return recipe.isPresent() && canInsertAmount(inventory) &&
+                canInsertItem(inventory, recipe.get().getResultItem());
     }
 
     private static boolean canInsertItem(SimpleContainer inventory, ItemStack stack) {
@@ -159,14 +165,23 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
         return inventory.getItem(2).getMaxStackSize() > inventory.getItem(2).getCount();
     }
 
-    private static void craftItem(BreedingStructureEntity entity) {
-        if(hasRecipe(entity)) {
-            entity.itemHandler.extractItem(0, 1, false);
-            entity.itemHandler.setStackInSlot(2, new ItemStack(ModItems.VEGIDIA.get(),
-                    entity.itemHandler.getStackInSlot(2).getCount() + 1));
+    private static void craftItem(BreedingStructureEntity pEntity) {
+        Level level = pEntity.level;
+        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
+        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
+            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
         }
 
-        entity.resetProgress();
+        Optional<BreedingStructureRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(BreedingStructureRecipe.Type.INSTANCE, inventory, level);
+
+        if(hasRecipe(pEntity)) {
+            pEntity.itemHandler.extractItem(0, 1, false);
+                    pEntity.itemHandler.setStackInSlot(2, new ItemStack(recipe.get().getResultItem().getItem(),
+                            pEntity.itemHandler.getStackInSlot(2).getCount() + 1));
+
+            pEntity.resetProgress();
+        }
     }
 
     private void resetProgress() {

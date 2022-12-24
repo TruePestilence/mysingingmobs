@@ -68,6 +68,7 @@ public class BreedingStructure extends BaseEntityBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public RenderShape getRenderShape(BlockState p_49232_) {
         return RenderShape.MODEL;
     }
