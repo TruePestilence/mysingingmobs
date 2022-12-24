@@ -17,7 +17,7 @@ public class BreedingStructureMenu extends AbstractContainerMenu {
     public final Level level;
     public final ContainerData data;
 
-    protected BreedingStructureMenu(int id, Inventory inv, FriendlyByteBuf data) {
+    public BreedingStructureMenu(int id, Inventory inv, FriendlyByteBuf data) {
         this(id, inv, inv.player.level.getBlockEntity(data.readBlockPos()), new SimpleContainerData(2));
     }
 
@@ -33,9 +33,9 @@ public class BreedingStructureMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 59, 18));
-            this.addSlot(new SlotItemHandler(handler, 1, 100, 18));
-            this.addSlot(new SlotItemHandler(handler, 2, 79, 61));
+            this.addSlot(new SlotItemHandler(handler, 0, 60, 19));
+            this.addSlot(new SlotItemHandler(handler, 1, 101, 19));
+            this.addSlot(new SlotItemHandler(handler, 2, 80, 62));
         });
 
         addDataSlots(data);

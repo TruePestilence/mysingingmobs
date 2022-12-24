@@ -13,6 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.truepestilence.msm.MySingingMod;
+import net.truepestilence.msm.block.custom.MonsterEgg;
 import net.truepestilence.msm.item.ModCreativeModeTab;
 import net.truepestilence.msm.item.ModItems;
 import net.truepestilence.msm.block.custom.BreedingStructure;
@@ -125,8 +126,16 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> BREEDING_STRUCTURE = registerBlock("breeding_structure",
             () -> new BreedingStructure(BlockBehaviour.Properties.of(Material.WOOD)
-                    .strength(2F,2F)),
+                    .strength(2F,2F).noOcclusion()),
             ModCreativeModeTab.MSM_TAB);
+
+    //Eggs
+    public static final RegistryObject<Block> EGG_NOGGIN = registerBlock("egg_noggin", () -> new MonsterEgg(BlockBehaviour.Properties.of(Material.EGG).strength(0.5F,0.5F).noOcclusion()), ModCreativeModeTab.EGG_TAB);
+    public static final RegistryObject<Block> EGG_MAMMOTT = registerBlock("egg_mammott", () -> new MonsterEgg(BlockBehaviour.Properties.of(Material.EGG).strength(0.5F,0.5F).noOcclusion()), ModCreativeModeTab.EGG_TAB);
+    public static final RegistryObject<Block> EGG_TOE_JAMMER = registerBlock("egg_toejammer", () -> new MonsterEgg(BlockBehaviour.Properties.of(Material.EGG).strength(0.5F,0.5F).noOcclusion()), ModCreativeModeTab.EGG_TAB);
+    public static final RegistryObject<Block> EGG_POTBELLY = registerBlock("egg_potbelly", () -> new MonsterEgg(BlockBehaviour.Properties.of(Material.EGG).strength(0.5F,0.5F).noOcclusion()), ModCreativeModeTab.EGG_TAB);
+    public static final RegistryObject<Block> EGG_TWEEDLE = registerBlock("egg_tweedle", () -> new MonsterEgg(BlockBehaviour.Properties.of(Material.EGG).strength(0.5F,0.5F).noOcclusion()), ModCreativeModeTab.EGG_TAB);
+
 
     public static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

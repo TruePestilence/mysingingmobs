@@ -45,5 +45,12 @@
 
   "block.msm.breeding_structure": "Breeding Structure",
 
-  "itemGroup.msmtab": "My Singing Mod"
+  "block.msm.egg_noggin": "Noggin Egg",
+  "block.msm.egg_mammott": "Mammott Egg",
+  "block.msm.egg_toejammer": "Toe Jammer Egg",
+  "block.msm.egg_potbelly": "Potbelly Egg",
+  "block.msm.egg_tweedle": "Tweedle Egg",
+
+  "itemGroup.msmtab": "My Singing Mod",
+  "itemGroup.eggtab": "MSM Eggs"
 }

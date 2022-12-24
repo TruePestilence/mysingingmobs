@@ -1,5 +1,19 @@
 {
   "variants": {
-    "": {"model": "msm:block/breeding_structure"}
+    "facing=north": {
+      "model": "msm:block/breeding_structure"
+    },
+    "facing=east": {
+      "model": "msm:block/breeding_structure",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "msm:block/breeding_structure",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "msm:block/breeding_structure",
+      "y": 270
+    }
   }
 }

@@ -1,6 +1,5 @@
 package net.truepestilence.msm.block.entity;
 
-import com.mojang.serialization.Decoder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -15,7 +14,6 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -26,8 +24,6 @@ import net.truepestilence.msm.item.ModItems;
 import net.truepestilence.msm.screen.BreedingStructureMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.swing.plaf.SeparatorUI;
 
 public class BreedingStructureEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
@@ -41,7 +37,7 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 100;
+    private int maxProgress = 69;
 
     public BreedingStructureEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BREEDING_STRUCTURE.get(), pos, state);
@@ -65,7 +61,7 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
 
             @Override
             public int getCount() {
-                return 0;
+                return 2;
             }
         };
     }
@@ -84,7 +80,7 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if(cap == ForgeCapabilities.ITEM_HANDLER) {
-            lazyItemHandler.cast();
+            return lazyItemHandler.cast();
         }
 
         return super.getCapability(cap, side);
@@ -130,7 +126,6 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
         if(level.isClientSide()) {
             return;
         }
-
         if(hasRecipe(entity)) {
             entity.progress++;
             setChanged(level, pos, state);
@@ -153,20 +148,20 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
         boolean hasEggInFirstSlot = entity.itemHandler.getStackInSlot(0).getItem() == ModItems.VEGIDIA.get();
 
         return hasEggInFirstSlot && canInsertAmount(inventory) &&
-                canInsertItem(inventory, new ItemStack(ModItems.VEGIDIA.get(), 1));
+                canInsertItem(inventory, new ItemStack(ModItems.VEGIDIA.get(), 0));
     }
 
     private static boolean canInsertItem(SimpleContainer inventory, ItemStack stack) {
-        return inventory.getItem(3).getItem() == stack.getItem() || inventory.getItem(2).isEmpty();
+        return inventory.getItem(2).getItem() == stack.getItem() || inventory.getItem(2).isEmpty();
     }
 
     private static boolean canInsertAmount(SimpleContainer inventory) {
-        return inventory.getItem(2).getMaxStackSize() > inventory.getItem(3).getCount();
+        return inventory.getItem(2).getMaxStackSize() > inventory.getItem(2).getCount();
     }
 
     private static void craftItem(BreedingStructureEntity entity) {
         if(hasRecipe(entity)) {
-            entity.itemHandler.extractItem(1, 1, true);
+            entity.itemHandler.extractItem(0, 1, false);
             entity.itemHandler.setStackInSlot(2, new ItemStack(ModItems.VEGIDIA.get(),
                     entity.itemHandler.getStackInSlot(2).getCount() + 1));
         }
