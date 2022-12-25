@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "M#M",
+    "WHW"
+  ],
+  "key": {
+    "#": {"item": "mysingingmod:pyrozite"},
+    "G": {"tag": "forge:glass"},
+    "M": {"tag": "forge:mushrooms"},
+    "W": {"tag": "minecraft:logs"},
+    "H": {"item": "minecraft:hay_block"}
+  },
+  "result": {
+    "item": "mysingingmod:nursery"
+  }
+}

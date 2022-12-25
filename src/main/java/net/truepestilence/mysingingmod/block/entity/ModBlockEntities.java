@@ -16,6 +16,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("breeding_structure", () ->
                     BlockEntityType.Builder.of(BreedingStructureEntity::new,
                             ModBlocks.BREEDING_STRUCTURE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<NurseryEntity>> NURSERY =
+            BLOCK_ENTITIES.register("nursery", () ->
+                    BlockEntityType.Builder.of(NurseryEntity::new,
+                            ModBlocks.NURSERY.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

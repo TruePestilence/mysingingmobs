@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    " W ",
+    "SHS"
+  ],
+  "key": {
+    "#": {"item": "mysingingmod:krystillium"},
+    "B": {"item": "minecraft:bamboo"},
+    "W": {"tag": "minecraft:logs"},
+    "S": {"tag": "minecraft:stone_crafting_materials"},
+    "H": {"item": "minecraft:hay_block"}
+  },
+  "result": {
+    "item": "mysingingmod:breeding_structure"
+  }
+}

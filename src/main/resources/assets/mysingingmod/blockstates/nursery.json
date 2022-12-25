@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mysingingmod:block/nursery"
+    },
+    "facing=east": {
+      "model": "mysingingmod:block/nursery",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "mysingingmod:block/nursery",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mysingingmod:block/nursery",
+      "y": 270
+    }
+  }
+}
