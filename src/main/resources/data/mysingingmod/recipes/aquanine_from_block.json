@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "mysingingmod:aquanine_block"}
+  ],
+  "result": {
+    "item": "mysingingmod:aquanine",
+    "count": 9
+  }
+}

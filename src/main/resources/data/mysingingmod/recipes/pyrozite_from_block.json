@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "mysingingmod:pyrozite_block"}
+  ],
+  "result": {
+    "item": "mysingingmod:pyrozite",
+    "count": 9
+  }
+}

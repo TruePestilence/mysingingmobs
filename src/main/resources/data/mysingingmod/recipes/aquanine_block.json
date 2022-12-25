@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "mysingingmod:aquanine"
+    }
+  },
+  "result": {
+    "item": "mysingingmod:aquanine_block"
+  }
+}

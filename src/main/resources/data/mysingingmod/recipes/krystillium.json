@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "mysingingmod:vegidia"},
+    {"item": "mysingingmod:frozium"},
+    {"item": "mysingingmod:skylite"},
+    {"item": "mysingingmod:aquanine"},
+    {"item": "mysingingmod:stonyx"}
+  ],
+  "result": {
+    "item": "mysingingmod:krystillium"
+  }
+}

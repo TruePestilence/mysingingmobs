@@ -1,0 +1,20 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "minecraft:snowy_beach",
+    "minecraft:stony_shore",
+    "minecraft:swamp",
+    "minecraft:beach",
+    "minecraft:river",
+    "minecraft:frozen_river",
+    "minecraft:warm_ocean",
+    "minecraft:lukewarm_ocean",
+    "minecraft:deep_lukewarm_ocean",
+    "minecraft:cold_ocean",
+    "minecraft:deep_cold_ocean",
+    "minecraft:frozen_ocean",
+    "minecraft:deep_frozen_ocean"
+  ],
+  "features": "mysingingmod:aquanine_ore_placed",
+  "step": "underground_ores"
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "mysingingmod:aurorium_block"}
+  ],
+  "result": {
+    "item": "mysingingmod:aurorium",
+    "count": 9
+  }
+}

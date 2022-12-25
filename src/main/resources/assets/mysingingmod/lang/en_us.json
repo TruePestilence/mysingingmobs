@@ -1,0 +1,56 @@
+{
+  "item.mysingingmod.vegidia": "Vegidia",
+  "item.mysingingmod.frozium": "Frozium",
+  "item.mysingingmod.skylite": "Skylite",
+  "item.mysingingmod.aquanine": "Aquanine",
+  "item.mysingingmod.stonyx": "Stonyx",
+  "item.mysingingmod.pyrozite": "Pyrozite",
+
+  "item.mysingingmod.confettite": "Confettite",
+  "item.mysingingmod.nebulox": "Nebulox",
+  "item.mysingingmod.aurorium": "Aurorium",
+  "item.mysingingmod.quarritz": "Quarritz",
+
+  "item.mysingingmod.krystillium": "Krystillium",
+
+  "block.mysingingmod.vegidia_block": "Vegidia Block",
+  "block.mysingingmod.vegidia_ore": "Vegidia Ore",
+  "block.mysingingmod.deepslate_vegidia_ore": "Deepslate Vegidia Ore",
+
+  "block.mysingingmod.frozium_block": "Frozium Block",
+  "block.mysingingmod.frozium_ore": "Frozium Ore",
+  "block.mysingingmod.deepslate_frozium_ore": "Deepslate Frozium Ore",
+
+  "block.mysingingmod.skylite_block": "Skylite Block",
+  "block.mysingingmod.skylite_ore": "Skylite Ore",
+  "block.mysingingmod.deepslate_skylite_ore": "Deepslate Skylite Ore",
+
+  "block.mysingingmod.aquanine_block": "Aquanine Block",
+  "block.mysingingmod.aquanine_ore": "Aquanine Ore",
+  "block.mysingingmod.deepslate_aquanine_ore": "Deepslate Aquanine Ore",
+
+  "block.mysingingmod.stonyx_block": "Stonyx Block",
+  "block.mysingingmod.stonyx_ore": "Stonyx Ore",
+  "block.mysingingmod.deepslate_stonyx_ore": "Deepslate Stonyx Ore",
+
+  "block.mysingingmod.pyrozite_block": "Pyrozite Block",
+  "block.mysingingmod.pyrozite_ore": "Pyrozite Ore",
+  "block.mysingingmod.deepslate_pyrozite_ore": "Deepslate Pyrozite Ore",
+  "block.mysingingmod.nether_pyrozite_ore": "Nether Pyrozite Ore",
+
+  "block.mysingingmod.confettite_block": "Confettite Block",
+  "block.mysingingmod.nebulox_block": "Nebulox Block",
+  "block.mysingingmod.aurorium_block": "Aurorium Block",
+  "block.mysingingmod.quarritz_block": "Quarritz Block",
+
+  "block.mysingingmod.breeding_structure": "Breeding Structure",
+
+  "block.mysingingmod.egg_noggin": "Noggin Egg",
+  "block.mysingingmod.egg_mammott": "Mammott Egg",
+  "block.mysingingmod.egg_toejammer": "Toe Jammer Egg",
+  "block.mysingingmod.egg_potbelly": "Potbelly Egg",
+  "block.mysingingmod.egg_tweedle": "Tweedle Egg",
+
+  "itemGroup.msmtab": "My Singing Mod",
+  "itemGroup.eggtab": "MSM Eggs"
+}

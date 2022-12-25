@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mysingingmod:block/breeding_structure"
+    },
+    "facing=east": {
+      "model": "mysingingmod:block/breeding_structure",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "mysingingmod:block/breeding_structure",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mysingingmod:block/breeding_structure",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "mysingingmod:block/egg/potbelly",
+		"1": "mysingingmod:block/egg/potbelly_add",
+		"particle": "mysingingmod:block/egg/potbelly"
+	},
+	"elements": [
+		{
+			"from": [6, 0, 5],
+			"to": [10, 3, 11],
+			"faces": {
+				"north": {"uv": [8, 0, 12, 3], "texture": "#0"},
+				"east": {"uv": [0, 6, 6, 9], "texture": "#0"},
+				"south": {"uv": [8, 3, 12, 6], "texture": "#0"},
+				"west": {"uv": [6, 6, 12, 9], "texture": "#0"},
+				"up": {"uv": [4, 6, 0, 0], "texture": "#0"},
+				"down": {"uv": [8, 0, 4, 6], "texture": "#0"}
+			}
+		},
+		{
+			"from": [9, 3, 8],
+			"to": [11, 5, 8],
+			"faces": {
+				"north": {"uv": [0, 0, 2, 2], "texture": "#1"},
+				"east": {"uv": [0, 0, 0, 2], "texture": "#1"},
+				"south": {"uv": [0, 2, 2, 4], "texture": "#1"},
+				"west": {"uv": [0, 0, 0, 2], "texture": "#1"},
+				"up": {"uv": [2, 0, 0, 0], "texture": "#1"},
+				"down": {"uv": [2, 0, 0, 0], "texture": "#1"}
+			}
+		},
+		{
+			"from": [5, 2, 7],
+			"to": [7, 4, 9],
+			"faces": {
+				"north": {"uv": [4, 1, 6, 3], "texture": "#1"},
+				"east": {"uv": [4, 0, 6, 1], "texture": "#1"},
+				"south": {"uv": [4, 3, 6, 5], "texture": "#1"},
+				"west": {"uv": [2, 2, 4, 4], "texture": "#1"},
+				"up": {"uv": [2, 0, 4, 2], "texture": "#1"},
+				"down": {"uv": [4, 0, 6, 1], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "VoxelShapes",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2]
+		}
+	]
+}
