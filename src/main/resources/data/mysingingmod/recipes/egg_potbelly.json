@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S!S",
+    "!#!",
+    "S!S"
+  ],
+  "key": {
+    "#": {"item": "mysingingmod:life_formula"},
+    "!": {"item": "mysingingmod:vegidia"},
+    "S": {"item": "minecraft:deepslate"}
+  },
+  "result": {
+    "item": "mysingingmod:egg_potbelly"
+  }
+}

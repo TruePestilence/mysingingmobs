@@ -35,6 +35,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> KRYSTILLIUM = ITEMS.register("krystillium",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB)));
+    public static final RegistryObject<Item> LIFE_FORMULA = ITEMS.register("life_formula",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB).stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

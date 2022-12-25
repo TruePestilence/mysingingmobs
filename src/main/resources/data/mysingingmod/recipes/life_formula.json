@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S!S",
+    "C#C",
+    "S?S"
+  ],
+  "key": {
+    "#": {"item": "minecraft:ender_pearl"},
+    "!": {"item": "mysingingmod:krystillium"},
+    "?": {"item": "mysingingmod:pyrozite"},
+    "C": {"item": "minecraft:copper_ingot"},
+    "S": {"item": "minecraft:bone_meal"}
+  },
+  "result": {
+    "item": "mysingingmod:life_formula",
+    "count": 2
+  }
+}
