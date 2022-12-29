@@ -2,10 +2,12 @@ package net.truepestilence.mysingingmod.networking;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.truepestilence.mysingingmod.MySingingMod;
+import net.truepestilence.mysingingmod.networking.packet.NurseryC2SPacket;
 
 public class ModNetworking {
     private static SimpleChannel INSTANCE;
@@ -25,6 +27,11 @@ public class ModNetworking {
 
         INSTANCE = net;
 
+        net.messageBuilder(NurseryC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(NurseryC2SPacket::new)
+                .encoder(NurseryC2SPacket::toBytes)
+                .consumerMainThread(NurseryC2SPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer (MSG message) {

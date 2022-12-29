@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mysingingmod:egg_ghazt", "required": false},
+    {"id": "mysingingmod:egg_ghazt_rare", "required": false},
+    {"id": "mysingingmod:egg_ghazt_epic", "required": false},
+
+    {"id": "mysingingmod:egg_whisp", "required": false},
+    {"id": "mysingingmod:egg_whisp_rare", "required": false},
+    {"id": "mysingingmod:egg_sox", "required": false},
+    {"id": "mysingingmod:egg_sox_rare", "required": false},
+    {"id": "mysingingmod:egg_nebulob", "required": false},
+    {"id": "mysingingmod:egg_nebulob_rare", "required": false},
+    {"id": "mysingingmod:egg_jellbilly", "required": false},
+    {"id": "mysingingmod:egg_jellbilly_rare", "required": false}
+  ]
+}

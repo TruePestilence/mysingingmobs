@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mysingingmod:egg_gjoob", "required": false},
+    {"id": "mysingingmod:egg_gjoob_rare", "required": false},
+    {"id": "mysingingmod:egg_strombonin", "required": false},
+    {"id": "mysingingmod:egg_strombonin_rare", "required": false},
+    {"id": "mysingingmod:egg_yawstrich", "required": false},
+    {"id": "mysingingmod:egg_cherubble", "required": false},
+    {"id": "mysingingmod:egg_cataliszt", "required": false},
+
+    {"id": "mysingingmod:egg_bleatnik", "required": false},
+    {"id": "mysingingmod:egg_sporerow", "required": false},
+    {"id": "mysingingmod:egg_cranchee", "required": false},
+    {"id": "mysingingmod:egg_shlep", "required": false}
+  ]
+}

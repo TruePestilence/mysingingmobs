@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mysingingmod:egg_theremind", "required": false},
+    {"id": "mysingingmod:egg_theremind_rare", "required": false},
+
+    {"id": "mysingingmod:egg_bonkers", "required": false},
+    {"id": "mysingingmod:egg_poppette", "required": false},
+    {"id": "mysingingmod:egg_yuggler", "required": false},
+    {"id": "mysingingmod:egg_yuggler_rare", "required": false},
+    {"id": "mysingingmod:egg_dejajin", "required": false},
+    {"id": "mysingingmod:egg_xyster", "required": false},
+    {"id": "mysingingmod:egg_cahoot", "required": false},
+
+    {"id": "mysingingmod:egg_tapricorn", "required": false},
+    {"id": "mysingingmod:egg_rooba", "required": false},
+    {"id": "mysingingmod:egg_periscorp", "required": false},
+    {"id": "mysingingmod:egg_frondley", "required": false},
+    {"id": "mysingingmod:egg_larvaluss", "required": false},
+    {"id": "mysingingmod:egg_gday", "required": false},
+
+    {"id": "mysingingmod:egg_gloptic", "required": false},
+    {"id": "mysingingmod:egg_enchantling", "required": false}
+  ]
+}

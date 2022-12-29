@@ -10,22 +10,22 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 import net.truepestilence.mysingingmod.block.ModBlocks;
-import net.truepestilence.mysingingmod.block.entity.BreedingStructureEntity;
+import net.truepestilence.mysingingmod.block.entity.NurseryEntity;
 
-public class BreedingStructureMenu extends AbstractContainerMenu {
-    public final BreedingStructureEntity blockEntity;
+public class NurseryMenu extends AbstractContainerMenu {
+    public final NurseryEntity blockEntity;
     public final Level level;
     public final ContainerData data;
 
-    public BreedingStructureMenu(int id, Inventory inv, FriendlyByteBuf data) {
-        this(id, inv, inv.player.level.getBlockEntity(data.readBlockPos()), new SimpleContainerData(2));
+    public NurseryMenu(int id, Inventory inv, FriendlyByteBuf data) {
+        this(id, inv, inv.player.level.getBlockEntity(data.readBlockPos()), new SimpleContainerData(1));
     }
 
 
-    public BreedingStructureMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.BREEDING_STRUCTURE.get(), id);
+    public NurseryMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.NURSERY.get(), id);
         checkContainerSize(inv, 3);
-        blockEntity = (BreedingStructureEntity) entity;
+        blockEntity = (NurseryEntity) entity;
         this.level = inv.player.level;
         this.data = data;
 
@@ -33,9 +33,7 @@ public class BreedingStructureMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 60, 19));
-            this.addSlot(new SlotItemHandler(handler, 1, 101, 19));
-            this.addSlot(new SlotItemHandler(handler, 2, 80, 62));
+            this.addSlot(new SlotItemHandler(handler, 0, 80, 38));
         });
 
         addDataSlots(data);
@@ -45,14 +43,6 @@ public class BreedingStructureMenu extends AbstractContainerMenu {
         return data.get(0) > 0;
     }
 
-    public int getScaledProgress() {
-        int progress = data.get(0);
-        int maxProgress = data.get(1);
-        int progressArrowSize = 22;
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
-
     private static final int HOTBAR_SLOT_COUNT = 9;
     private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
     private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
@@ -60,7 +50,7 @@ public class BreedingStructureMenu extends AbstractContainerMenu {
     private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
@@ -98,7 +88,7 @@ public class BreedingStructureMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, ModBlocks.BREEDING_STRUCTURE.get());
+                player, ModBlocks.NURSERY.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

@@ -5,7 +5,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -13,10 +14,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,14 +24,14 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.truepestilence.mysingingmod.MySingingMod;
 import net.truepestilence.mysingingmod.recipe.BreedingStructureRecipe;
 import net.truepestilence.mysingingmod.screen.BreedingStructureMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class BreedingStructureEntity extends BlockEntity implements MenuProvider {
@@ -42,6 +41,24 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
             setChanged();
         }
     };
+    public static final TagKey<Item> earthTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "earth_element"));
+    public static final TagKey<Item> coldTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "cold_element"));
+    public static final TagKey<Item> airTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "air_element"));
+    public static final TagKey<Item> plantTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "plant_element"));
+    public static final TagKey<Item> waterTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "water_element"));
+    public static final TagKey<Item> fireTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "fire_element"));
+    public static final TagKey<Item> psychicTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "psychic_element"));
+    public static final TagKey<Item> faerieTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "faerie_element"));
+    public static final TagKey<Item> boneTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "bone_element"));
+    public static final TagKey<Item> lightTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "light_element"));
+    public static final TagKey<Item> plasmaTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "plasma_element"));
+    public static final TagKey<Item> shadowTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "shadow_element"));
+    public static final TagKey<Item> mechTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "mech_element"));
+    public static final TagKey<Item> crystalTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "crystal_element"));
+    public static final TagKey<Item> poisonTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "poison_element"));
+    public static final TagKey<Item> seasonalTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "seasonal_element"));
+    public static final TagKey<Item> mythicalTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "mythical_element"));
+    public static final TagKey<Item> legendaryTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "legendary_element"));
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
@@ -139,6 +156,7 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
         if(hasRecipe(entity)) {
             entity.progress++;
             setChanged(level, pos, state);
+            entity.maxProgress = breedingTime(entity);
 
             if(entity.progress >= entity.maxProgress) {
                 craftItem(entity);
@@ -158,6 +176,37 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
         Optional<BreedingStructureRecipe> recipe = level.getRecipeManager().getRecipeFor(BreedingStructureRecipe.Type.INSTANCE, inventory, level);
         return recipe.isPresent() && canInsertAmount(inventory) &&
                 canInsertItem(inventory, recipe.get().getResultItem());
+    }
+
+    public static int breedingTime(BreedingStructureEntity entity) {
+        int y = 0;
+        for(int i = 0; i < 2; i++){
+            ItemStack ing;
+            try {
+                ing = entity.itemHandler.getStackInSlot(i);
+            } catch(Exception e) {
+                return 0;
+            }
+            if(ing.is(earthTag)) { y += 23*15; }
+            if(ing.is(coldTag)) { y += 23*15; }
+            if(ing.is(waterTag)) { y += 23*15; }
+            if(ing.is(plantTag)) { y += 23*15; }
+            if(ing.is(airTag)) { y += 23*15; }
+            if(ing.is(plasmaTag)) { y += 23*45; }
+            if(ing.is(shadowTag)) { y += 23*45; }
+            if(ing.is(mechTag)) { y += 23*45; }
+            if(ing.is(crystalTag)) { y += 23*45; }
+            if(ing.is(poisonTag)) { y += 23*45; }
+            if(ing.is(legendaryTag)) { y *= 23*45; }
+            if(ing.is(mythicalTag)) { y *= 23*45; }
+            if(ing.is(seasonalTag)) { y += 23*60; }
+            if(ing.is(fireTag)) { y += 23*30; }
+            if(ing.is(psychicTag)) { y += 23*45; }
+            if(ing.is(faerieTag)) { y += 23*45; }
+            if(ing.is(lightTag)) { y += 23*45; }
+            if(ing.is(boneTag)) { y += 23*45; }
+        }
+        return y;
     }
 
     private static boolean canInsertItem(SimpleContainer inventory, ItemStack stack) {

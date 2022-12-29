@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mysingingmod:egg_humbug", "required": false},
+    {"id": "mysingingmod:egg_humbug_rare", "required": false},
+
+    {"id": "mysingingmod:egg_kazilleon", "required": false},
+    {"id": "mysingingmod:egg_kazilleon_rare", "required": false},
+    {"id": "mysingingmod:egg_dragong", "required": false},
+    {"id": "mysingingmod:egg_dragong_rare", "required": false},
+    {"id": "mysingingmod:egg_fungpray", "required": false},
+    {"id": "mysingingmod:egg_fungpray_rare", "required": false},
+    {"id": "mysingingmod:egg_jellbilly", "required": false},
+    {"id": "mysingingmod:egg_jellbilly_rare", "required": false}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mysingingmod:egg_flootfly", "required": false},
+    {"id": "mysingingmod:egg_flootfly_rare", "required": false},
+
+    {"id": "mysingingmod:egg_hippityhop", "required": false},
+    {"id": "mysingingmod:egg_squot", "required": false},
+    {"id": "mysingingmod:egg_wimmzies", "required": false},
+    {"id": "mysingingmod:egg_wimmzies_rare", "required": false},
+    {"id": "mysingingmod:egg_dejajin", "required": false},
+    {"id": "mysingingmod:egg_knucklehead", "required": false},
+    {"id": "mysingingmod:egg_osstax", "required": false},
+
+    {"id": "mysingingmod:egg_cantorell", "required": false},
+    {"id": "mysingingmod:egg_bridgit", "required": false},
+    {"id": "mysingingmod:egg_bridgit_rare", "required": false},
+    {"id": "mysingingmod:egg_clavignat", "required": false},
+    {"id": "mysingingmod:egg_frondley", "required": false},
+    {"id": "mysingingmod:egg_larvaluss", "required": false},
+    {"id": "mysingingmod:egg_mushaboom", "required": false},
+
+    {"id": "mysingingmod:egg_pladdie", "required": false},
+    {"id": "mysingingmod:egg_enchantling", "required": false}
+  ]
+}

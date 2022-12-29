@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mysingingmod:egg_grumpyre", "required": false},
+    {"id": "mysingingmod:egg_grumpyre_rare", "required": false},
+    {"id": "mysingingmod:egg_grumpyre_epic", "required": false},
+
+    {"id": "mysingingmod:egg_whisp", "required": false},
+    {"id": "mysingingmod:egg_whisp_rare", "required": false},
+    {"id": "mysingingmod:egg_arackulele", "required": false},
+    {"id": "mysingingmod:egg_arackulele_rare", "required": false},
+    {"id": "mysingingmod:egg_boodoo", "required": false},
+    {"id": "mysingingmod:egg_boodoo_rare", "required": false},
+    {"id": "mysingingmod:egg_kazilleon", "required": false},
+    {"id": "mysingingmod:egg_kazilleon_rare", "required": false}
+  ]
+}

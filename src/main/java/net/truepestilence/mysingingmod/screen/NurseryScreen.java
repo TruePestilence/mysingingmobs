@@ -9,11 +9,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.truepestilence.mysingingmod.MySingingMod;
 
-public class BreedingStructureScreen extends AbstractContainerScreen<BreedingStructureMenu> {
+public class NurseryScreen extends AbstractContainerScreen<NurseryMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(MySingingMod.MOD_ID, "textures/gui/breeding_structure_gui.png");
+            new ResourceLocation(MySingingMod.MOD_ID, "textures/gui/nursery_gui.png");
 
-    public BreedingStructureScreen(BreedingStructureMenu menu, Inventory inv, Component component) {
+    public NurseryScreen(NurseryMenu menu, Inventory inv, Component component) {
         super(menu, inv, component);
     }
 
@@ -31,13 +31,6 @@ public class BreedingStructureScreen extends AbstractContainerScreen<BreedingStr
         int y = (height - imageHeight) / 2;
 
         this.blit(stack, x, y, 0, 0, imageWidth, imageHeight + 2);
-        renderProgressArrow(stack, x, y);
-    }
-
-    private void renderProgressArrow(PoseStack stack, int x, int y) {
-        if(menu.isCrafting()) {
-            blit(stack, x + 66, y + 37, 176, 0, 45, menu.getScaledProgress() + 1);
-        }
     }
 
     @Override

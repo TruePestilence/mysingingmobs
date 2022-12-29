@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mysingingmod:egg_jeeode", "required": false},
+    {"id": "mysingingmod:egg_jeeode_rare", "required": false},
+    {"id": "mysingingmod:egg_jeeode_epic", "required": false},
+
+    {"id": "mysingingmod:egg_boodoo", "required": false},
+    {"id": "mysingingmod:egg_boodoo_rare", "required": false},
+    {"id": "mysingingmod:egg_sox", "required": false},
+    {"id": "mysingingmod:egg_sox_rare", "required": false},
+    {"id": "mysingingmod:egg_bellowfish", "required": false},
+    {"id": "mysingingmod:egg_bellowfish_rare", "required": false},
+    {"id": "mysingingmod:egg_fungpray", "required": false},
+    {"id": "mysingingmod:egg_fungpray_rare", "required": false}
+  ]
+}

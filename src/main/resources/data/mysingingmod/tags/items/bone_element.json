@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mysingingmod:egg_clackula", "required": false},
+
+    {"id": "mysingingmod:egg_denchuhs", "required": false},
+    {"id": "mysingingmod:egg_hawlo", "required": false},
+    {"id": "mysingingmod:egg_peckidna", "required": false},
+    {"id": "mysingingmod:egg_xyster", "required": false},
+    {"id": "mysingingmod:egg_roarick", "required": false},
+    {"id": "mysingingmod:egg_osstax", "required": false},
+
+    {"id": "mysingingmod:egg_uuduk", "required": false},
+    {"id": "mysingingmod:egg_withur", "required": false},
+    {"id": "mysingingmod:egg_withur_rare", "required": false},
+    {"id": "mysingingmod:egg_banjaw", "required": false},
+    {"id": "mysingingmod:egg_banjaw_rare", "required": false},
+    {"id": "mysingingmod:egg_gday", "required": false},
+    {"id": "mysingingmod:egg_larvaluss", "required": false},
+    {"id": "mysingingmod:egg_mushaboom", "required": false},
+
+    {"id": "mysingingmod:egg_plinkajou", "required": false},
+    {"id": "mysingingmod:egg_enchantling", "required": false}
+  ]
+}

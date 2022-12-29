@@ -2,6 +2,7 @@ package net.truepestilence.mysingingmod;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,14 +12,18 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.truepestilence.mysingingmod.block.ModBlocks;
 import net.truepestilence.mysingingmod.block.entity.ModBlockEntities;
+import net.truepestilence.mysingingmod.entity.ModEntityTypes;
+import net.truepestilence.mysingingmod.entity.client.NogginRenderer;
 import net.truepestilence.mysingingmod.item.ModItems;
 import net.truepestilence.mysingingmod.networking.ModNetworking;
 import net.truepestilence.mysingingmod.recipe.ModRecipes;
 import net.truepestilence.mysingingmod.screen.BreedingStructureScreen;
 import net.truepestilence.mysingingmod.screen.ModMenuTypes;
+import net.truepestilence.mysingingmod.screen.NurseryScreen;
 import net.truepestilence.mysingingmod.world.feature.ModConfiguredFeatures;
 import net.truepestilence.mysingingmod.world.feature.ModPlacedFeatures;
 import org.slf4j.Logger;
+import software.bernie.geckolib3.GeckoLib;
 
 import static net.truepestilence.mysingingmod.MySingingMod.MOD_ID;
 
@@ -36,11 +41,15 @@ public class MySingingMod
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
 
+        ModEntityTypes.register(modEventBus);
+
         ModConfiguredFeatures.register(modEventBus);
         ModPlacedFeatures.register(modEventBus);
 
         ModMenuTypes.register(modEventBus);
         ModRecipes.register(modEventBus);
+
+        GeckoLib.initialize();
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -50,7 +59,9 @@ public class MySingingMod
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(ModNetworking::register);
+        event.enqueueWork(() -> {
+            ModNetworking.register();
+        });
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
@@ -59,6 +70,8 @@ public class MySingingMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.BREEDING_STRUCTURE.get(), BreedingStructureScreen::new);
+            MenuScreens.register(ModMenuTypes.NURSERY.get(), NurseryScreen::new);
+            EntityRenderers.register(ModEntityTypes.NOGGIN.get(), NogginRenderer::new);
         }
     }
 }

@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mysingingmod:egg_punkleton", "required": false},
+    {"id": "mysingingmod:egg_punkleton_rare", "required": false},
+    {"id": "mysingingmod:egg_punkleton_epic", "required": false},
+    {"id": "mysingingmod:egg_yool", "required": false},
+    {"id": "mysingingmod:egg_yool_rare", "required": false},
+    {"id": "mysingingmod:egg_yool_epic", "required": false},
+    {"id": "mysingingmod:egg_schmoochle", "required": false},
+    {"id": "mysingingmod:egg_schmoochle_rare", "required": false},
+    {"id": "mysingingmod:egg_schmoochle_epic", "required": false},
+    {"id": "mysingingmod:egg_blabbit", "required": false},
+    {"id": "mysingingmod:egg_blabbit_rare", "required": false},
+    {"id": "mysingingmod:egg_blabbit_epic", "required": false},
+    {"id": "mysingingmod:egg_hoola", "required": false},
+    {"id": "mysingingmod:egg_hoola_rare", "required": false},
+    {"id": "mysingingmod:egg_hoola_epic", "required": false},
+
+    {"id": "mysingingmod:egg_gobbleygourd", "required": false},
+    {"id": "mysingingmod:egg_gobbleygourd_rare", "required": false},
+    {"id": "mysingingmod:egg_gobbleygourd_epic", "required": false},
+    {"id": "mysingingmod:egg_clavavera", "required": false},
+    {"id": "mysingingmod:egg_viveine", "required": false},
+    {"id": "mysingingmod:egg_jamboree", "required": false},
+    {"id": "mysingingmod:egg_carillong", "required": false},
+    {"id": "mysingingmod:egg_whizbang", "required": false},
+    {"id": "mysingingmod:egg_ffidyll", "required": false},
+    {"id": "mysingingmod:egg_monculus", "required": false},
+    {"id": "mysingingmod:egg_booqwurm", "required": false},
+    {"id": "mysingingmod:egg_spurrit", "required": false}
+  ]
+}

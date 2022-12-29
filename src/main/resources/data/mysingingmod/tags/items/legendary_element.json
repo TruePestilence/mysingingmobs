@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mysingingmod:egg_shugabush", "required": false},
+    {"id": "mysingingmod:egg_shugarock", "required": false},
+    {"id": "mysingingmod:egg_shugabass", "required": false},
+    {"id": "mysingingmod:egg_shugajo", "required": false},
+    {"id": "mysingingmod:egg_shugitar", "required": false},
+    {"id": "mysingingmod:egg_shugabeats", "required": false},
+    {"id": "mysingingmod:egg_shugabuzz", "required": false},
+    {"id": "mysingingmod:egg_shugavox", "required": false},
+    {"id": "mysingingmod:egg_tawkerr", "required": false},
+    {"id": "mysingingmod:egg_parlsona", "required": false},
+    {"id": "mysingingmod:egg_maggpi", "required": false},
+    {"id": "mysingingmod:egg_stoowarb", "required": false}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mysingingmod:egg_reebro", "required": false},
+    {"id": "mysingingmod:egg_reebro_rare", "required": false},
+    {"id": "mysingingmod:egg_reebro_epic", "required": false},
+
+    {"id": "mysingingmod:egg_arackulele", "required": false},
+    {"id": "mysingingmod:egg_arackulele_rare", "required": false},
+    {"id": "mysingingmod:egg_bellowfish", "required": false},
+    {"id": "mysingingmod:egg_bellowfish_rare", "required": false},
+    {"id": "mysingingmod:egg_nebulob", "required": false},
+    {"id": "mysingingmod:egg_nebulob_rare", "required": false},
+    {"id": "mysingingmod:egg_dragong", "required": false},
+    {"id": "mysingingmod:egg_dragong_rare", "required": false}
+  ]
+}

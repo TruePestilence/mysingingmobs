@@ -129,7 +129,6 @@ public class ModBlocks {
             () -> new BreedingStructure(BlockBehaviour.Properties.of(Material.WOOD)
                     .strength(2F,2F).noOcclusion()),
             ModCreativeModeTab.MSM_TAB);
-
     public static final RegistryObject<Block> NURSERY = registerBlock("nursery",
             () -> new Nursery(BlockBehaviour.Properties.of(Material.WOOD)
                     .strength(2F,2F).noOcclusion()),
@@ -138,7 +137,7 @@ public class ModBlocks {
     //Eggs
     public static final RegistryObject<Block> EGG_NOGGIN = registerBlock("egg_noggin", () -> new MonsterEgg(BlockBehaviour.Properties.of(Material.EGG).strength(0.5F,0.5F).noOcclusion()), ModCreativeModeTab.EGG_TAB);
     public static final RegistryObject<Block> EGG_MAMMOTT = registerBlock("egg_mammott", () -> new MonsterEgg(BlockBehaviour.Properties.of(Material.EGG).strength(0.5F,0.5F).noOcclusion()), ModCreativeModeTab.EGG_TAB);
-    public static final RegistryObject<Block> EGG_TOE_JAMMER = registerBlock("egg_toejammer", () -> new MonsterEgg(BlockBehaviour.Properties.of(Material.EGG).strength(0.5F,0.5F).noOcclusion()), ModCreativeModeTab.EGG_TAB);
+    public static final RegistryObject<Block> EGG_TOEJAMMER = registerBlock("egg_toejammer", () -> new MonsterEgg(BlockBehaviour.Properties.of(Material.EGG).strength(0.5F,0.5F).noOcclusion()), ModCreativeModeTab.EGG_TAB);
     public static final RegistryObject<Block> EGG_POTBELLY = registerBlock("egg_potbelly", () -> new MonsterEgg(BlockBehaviour.Properties.of(Material.EGG).strength(0.5F,0.5F).noOcclusion()), ModCreativeModeTab.EGG_TAB);
     public static final RegistryObject<Block> EGG_TWEEDLE = registerBlock("egg_tweedle", () -> new MonsterEgg(BlockBehaviour.Properties.of(Material.EGG).strength(0.5F,0.5F).noOcclusion()), ModCreativeModeTab.EGG_TAB);
 
