@@ -13,6 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.truepestilence.mysingingmod.MySingingMod;
+import net.truepestilence.mysingingmod.block.custom.CastleCore;
 import net.truepestilence.mysingingmod.block.custom.MonsterEgg;
 import net.truepestilence.mysingingmod.block.custom.Nursery;
 import net.truepestilence.mysingingmod.item.ModCreativeModeTab;
@@ -132,6 +133,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> NURSERY = registerBlock("nursery",
             () -> new Nursery(BlockBehaviour.Properties.of(Material.WOOD)
                     .strength(2F,2F).noOcclusion()),
+            ModCreativeModeTab.MSM_TAB);
+    public static final RegistryObject<Block> CASTLE_CORE = registerBlock("castle_core",
+            () -> new CastleCore(BlockBehaviour.Properties.of(Material.AMETHYST)
+                    .strength(3F,10F).requiresCorrectToolForDrops()),
             ModCreativeModeTab.MSM_TAB);
 
     //Eggs

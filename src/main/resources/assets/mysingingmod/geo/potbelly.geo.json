@@ -1,0 +1,71 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "pot",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-3, 0, -3], "size": [6, 4, 6], "uv": [0, 26]},
+						{"origin": [-4, 4, -4], "size": [8, 2, 8], "uv": [0, 16]}
+					]
+				},
+				{
+					"name": "body",
+					"parent": "pot",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-3, 14, -1], "size": [6, 2, 6], "uv": [24, 0]},
+						{"origin": [-4, 6, -4], "size": [8, 8, 8], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "mainneck",
+					"parent": "body",
+					"pivot": [-0.75, 18, 2],
+					"cubes": [
+						{"origin": [-2, 16, 0], "size": [4, 6, 4], "uv": [24, 26]},
+						{"origin": [-3, 16, 3], "size": [0, 4, 6], "pivot": [-3, 19, 6], "rotation": [0, -45, 0], "uv": [12, 30]},
+						{"origin": [3, 18, 3], "size": [0, 4, 6], "pivot": [3, 16, 6], "rotation": [0, 45, 0], "uv": [24, 14]}
+					]
+				},
+				{
+					"name": "mainhead",
+					"parent": "mainneck",
+					"pivot": [-1, 23.66667, 1.5],
+					"cubes": [
+						{"origin": [-2, 22, -2], "size": [4, 4, 6], "uv": [24, 10]},
+						{"origin": [-3, 22, -3], "size": [6, 4, 1], "uv": [48, 0]},
+						{"origin": [-3, 21, 3], "size": [0, 4, 6], "pivot": [-3, 19, 6], "rotation": [0, -45, 0], "uv": [0, 30]}
+					]
+				},
+				{
+					"name": "subneck",
+					"parent": "body",
+					"pivot": [-2, 15, 2],
+					"cubes": [
+						{"origin": [-7, 15, 1], "size": [2, 4, 2], "pivot": [-4, 18, 2], "rotation": [0, 0, -72.5], "uv": [0, 16]}
+					]
+				},
+				{
+					"name": "subhead",
+					"parent": "subneck",
+					"pivot": [-4, 18, 2],
+					"cubes": [
+						{"origin": [-6.25, 19.25, 1], "size": [2, 4, 2], "pivot": [-4, 18, 2], "rotation": [0, 0, -110], "uv": [0, 0]},
+						{"origin": [-7.25, 23.25, 0], "size": [3, 1, 4], "pivot": [-4, 18, 2], "rotation": [0, 0, -110], "uv": [48, 5]}
+					]
+				}
+			]
+		}
+	]
+}

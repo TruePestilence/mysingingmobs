@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -43,11 +44,20 @@ public class BreedingStructure extends BaseEntityBlock {
             Block.box(-6,21,0,22,32,16)
             ).reduce((v1,v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
+    private static final VoxelShape SHAPE2 =
+            Stream.of(
+                    Block.box(0,0,0,16,32,16),
+                    Block.box(0,21,-6,16,32,22)
+            ).reduce((v1,v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     @Override
     @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
-        return SHAPE;
+    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
+        if(state.getValue(FACING) == Direction.NORTH || state.getValue(FACING) == Direction.SOUTH) {
+            return SHAPE;
+        } else {
+            return SHAPE2;
+        }
     }
 
     @Nullable

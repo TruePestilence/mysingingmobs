@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mysingingmod:block/castle_core"
+    },
+    "facing=east": {
+      "model": "mysingingmod:block/castle_core",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "mysingingmod:block/castle_core",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mysingingmod:block/castle_core",
+      "y": 270
+    }
+  }
+}

@@ -10,7 +10,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
 import net.truepestilence.mysingingmod.entity.ModEntityTypes;
-import net.truepestilence.mysingingmod.entity.custom.NogginEntity;
+import net.truepestilence.mysingingmod.entity.custom.*;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -41,13 +41,24 @@ public class NurseryC2SPacket {
             ServerLevel level = context.getSender().getLevel();
             EntityType type;
             List<String> list;
-            switch(stack.toString()) {
-                case("egg_noggin"): {
-                    type = ModEntityTypes.NOGGIN.get();
-                    list = NogginEntity.getNames();
+            switch (stack.getItem().toString()) {
+                case "egg_mammott" -> {
+                    type = ModEntityTypes.MAMMOTT.get();
+                    list = MammottEntity.getNames();
                 }
-
-                default: {
+                case "egg_potbelly" -> {
+                    type = ModEntityTypes.POTBELLY.get();
+                    list = PotbellyEntity.getNames();
+                }
+                case "egg_toejammer" -> {
+                    type = ModEntityTypes.TOE_JAMMER.get();
+                    list = ToeJammerEntity.getNames();
+                }
+                case "egg_tweedle" -> {
+                    type = ModEntityTypes.TWEEDLE.get();
+                    list = TweedleEntity.getNames();
+                }
+                default -> {
                     type = ModEntityTypes.NOGGIN.get();
                     list = NogginEntity.getNames();
                 }

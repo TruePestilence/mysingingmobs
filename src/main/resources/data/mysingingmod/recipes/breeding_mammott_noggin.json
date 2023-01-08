@@ -1,0 +1,8 @@
+{
+  "type": "mysingingmod:breeding",
+  "monsters": ["Mammott", "Noggin"],
+  "special": [
+    [{"item": "mysingingmod:egg_toejammer"}, 95.0],
+    [{"item": "mysingingmod:egg_potbelly"}, 5.0]
+  ]
+}

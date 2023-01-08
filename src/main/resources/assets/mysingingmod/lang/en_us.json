@@ -13,6 +13,7 @@
 
   "item.mysingingmod.krystillium": "Krystillium",
   "item.mysingingmod.life_formula": "Life-Formula",
+  "item.mysingingmod.monster_sigil": "Monster Sigil",
 
   "block.mysingingmod.vegidia_block": "Vegidia Block",
   "block.mysingingmod.vegidia_ore": "Vegidia Ore",
@@ -46,6 +47,7 @@
 
   "block.mysingingmod.breeding_structure": "Breeding Structure",
   "block.mysingingmod.nursery": "Nursery",
+  "block.mysingingmod.castle_core": "Castle Core",
 
   "block.mysingingmod.egg_noggin": "Noggin Egg",
   "block.mysingingmod.egg_mammott": "Mammott Egg",

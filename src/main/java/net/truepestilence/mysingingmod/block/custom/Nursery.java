@@ -70,8 +70,8 @@ public class Nursery extends BaseEntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if(state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if(blockEntity instanceof BreedingStructureEntity) {
-                ((BreedingStructureEntity) blockEntity).drops();
+            if(blockEntity instanceof NurseryEntity) {
+                ((NurseryEntity) blockEntity).drops();
             }
         }
         super.onRemove(state, level, pos, newState, isMoving);

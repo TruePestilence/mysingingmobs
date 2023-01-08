@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "BWB",
+    "S#S"
+  ],
+  "key": {
+    "#": {"item": "mysingingmod:krystillium"},
+    "B": {"item": "minecraft:lapis_block"},
+    "W": {"item": "mysingingmod:pyrozite"},
+    "S": {"item": "minecraft:amethyst_shard"}
+  },
+  "result": {
+    "item": "mysingingmod:castle_core"
+  }
+}

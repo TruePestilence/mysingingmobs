@@ -48,9 +48,6 @@
     {"id": "mysingingmod:egg_whaddle_epic", "required": false},
     {"id": "mysingingmod:egg_woolabee", "required": false},
     {"id": "mysingingmod:egg_woolabee_rare", "required": false},
-    {"id": "mysingingmod:egg_cantorell", "required": false},
-    {"id": "mysingingmod:egg_bridgit", "required": false},
-    {"id": "mysingingmod:egg_bridgit_rare", "required": false},
 
     {"id": "mysingingmod:egg_deedge", "required": false},
     {"id": "mysingingmod:egg_deedge_rare", "required": false},

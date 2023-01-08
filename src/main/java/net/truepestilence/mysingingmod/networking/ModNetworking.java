@@ -7,6 +7,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.truepestilence.mysingingmod.MySingingMod;
+import net.truepestilence.mysingingmod.networking.packet.ItemStackSyncS2CPacket;
 import net.truepestilence.mysingingmod.networking.packet.NurseryC2SPacket;
 
 public class ModNetworking {
@@ -32,6 +33,12 @@ public class ModNetworking {
                 .encoder(NurseryC2SPacket::toBytes)
                 .consumerMainThread(NurseryC2SPacket::handle)
                 .add();
+
+        net.messageBuilder(ItemStackSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(ItemStackSyncS2CPacket::new)
+                .encoder(ItemStackSyncS2CPacket::toBytes)
+                .consumerMainThread(ItemStackSyncS2CPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer (MSG message) {
@@ -40,5 +47,8 @@ public class ModNetworking {
 
     public static <MSG> void sendToPlayer (MSG message, ServerPlayer player) {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
+    }
+    public static <MSG> void sendToClients(MSG message) {
+        INSTANCE.send(PacketDistributor.ALL.noArg(), message);
     }
 }

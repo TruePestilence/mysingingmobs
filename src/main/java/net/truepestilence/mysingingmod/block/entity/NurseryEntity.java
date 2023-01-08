@@ -35,7 +35,9 @@ import net.truepestilence.mysingingmod.block.custom.MonsterEgg;
 import net.truepestilence.mysingingmod.block.custom.Nursery;
 import net.truepestilence.mysingingmod.entity.ModEntityTypes;
 import net.truepestilence.mysingingmod.entity.custom.NogginEntity;
+import net.truepestilence.mysingingmod.item.ModItems;
 import net.truepestilence.mysingingmod.networking.ModNetworking;
+import net.truepestilence.mysingingmod.networking.packet.ItemStackSyncS2CPacket;
 import net.truepestilence.mysingingmod.networking.packet.NurseryC2SPacket;
 import net.truepestilence.mysingingmod.screen.NurseryMenu;
 import org.jetbrains.annotations.NotNull;
@@ -50,54 +52,22 @@ public class NurseryEntity extends BlockEntity implements MenuProvider {
         protected void onContentsChanged(int slot) {
             setChanged();
         }
-    };
 
-    public static final TagKey<Item> earthTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "earth_element"));
-    public static final TagKey<Item> coldTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "cold_element"));
-    public static final TagKey<Item> airTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "air_element"));
-    public static final TagKey<Item> plantTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "plant_element"));
-    public static final TagKey<Item> waterTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "water_element"));
-    public static final TagKey<Item> fireTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "fire_element"));
-    public static final TagKey<Item> psychicTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "psychic_element"));
-    public static final TagKey<Item> faerieTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "faerie_element"));
-    public static final TagKey<Item> boneTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "bone_element"));
-    public static final TagKey<Item> lightTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "light_element"));
-    public static final TagKey<Item> plasmaTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "plasma_element"));
-    public static final TagKey<Item> shadowTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "shadow_element"));
-    public static final TagKey<Item> mechTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "mech_element"));
-    public static final TagKey<Item> crystalTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "crystal_element"));
-    public static final TagKey<Item> poisonTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "poison_element"));
-    public static final TagKey<Item> seasonalTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "seasonal_element"));
-    public static final TagKey<Item> mythicalTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "mythical_element"));
-    public static final TagKey<Item> legendaryTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "legendary_element"));
-    public static List<TagKey<Item>> getTags() {
-        List<TagKey<Item>> list = new ArrayList();
-        list.add(earthTag);
-        list.add(coldTag);
-        list.add(waterTag);
-        list.add(plantTag);
-        list.add(airTag);
-        list.add(plasmaTag);
-        list.add(shadowTag);
-        list.add(mechTag);
-        list.add(crystalTag);
-        list.add(poisonTag);
-        list.add(psychicTag);
-        list.add(faerieTag);
-        list.add(boneTag);
-        list.add(lightTag);
-        list.add(legendaryTag);
-        list.add(seasonalTag);
-        list.add(mythicalTag);
-        list.add(fireTag);
-        return list;
-    }
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return switch(slot) {
+                case 0 -> stack.is(monsterTag);
+                default -> super.isItemValid(slot, stack);
+            };
+        }
+    };
+    public static final TagKey<Item> monsterTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "all_monsters"));
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 60;
-    private Direction facing;
+    private final Direction facing;
 
     public NurseryEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.NURSERY.get(), pos, state);
@@ -187,9 +157,11 @@ public class NurseryEntity extends BlockEntity implements MenuProvider {
         if(level.isClientSide()) {
             return;
         }
+        ModNetworking.sendToClients(new ItemStackSyncS2CPacket(pos, entity.itemHandler));
         if(hasRecipe(entity)) {
             entity.progress++;
             setChanged(level, pos, state);
+            entity.maxProgress = getIncTime(entity.itemHandler.getStackInSlot(0));
             if(entity.progress >= entity.maxProgress) {
                 craftItem(entity, pos);
             }
@@ -203,10 +175,7 @@ public class NurseryEntity extends BlockEntity implements MenuProvider {
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
-        List<TagKey<Item>> list = getTags();
-        for (int i = 0; i < list.size(); i++) {
-            if(inventory.getItem(0).is(list.get(i))) { return true; }
-        }
+        if(inventory.getItem(0).is(monsterTag)) { return true; }
         return false;
     }
 
@@ -217,12 +186,29 @@ public class NurseryEntity extends BlockEntity implements MenuProvider {
         }
 
         BlockPos spawn = pos.relative(pEntity.facing, 1);
-        pEntity.itemHandler.extractItem(0, 1, false);
         ModNetworking.sendToServer(new NurseryC2SPacket(spawn, inventory.getItem(0)));
+        pEntity.itemHandler.extractItem(0, 1, false);
         pEntity.resetProgress();
+    }
+
+    private static int getIncTime(ItemStack pStack) {
+        return switch (pStack.getItem().toString()) {
+            case "egg_noggin", "egg_mammott", "egg_toejammer", "egg_potbelly", "egg_tweedle" -> 200;
+            default -> 60;
+        };
     }
 
     private void resetProgress() {
         this.progress = 0;
+    }
+
+    public ItemStack getRenderStack() {
+        return itemHandler.getStackInSlot(0);
+    }
+
+    public void setHandler(ItemStackHandler itemStackHandler) {
+        for(int i = 0; i < itemStackHandler.getSlots(); i++) {
+            itemHandler.setStackInSlot(i, itemStackHandler.getStackInSlot(i));
+        }
     }
 }

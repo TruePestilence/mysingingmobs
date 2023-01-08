@@ -13,11 +13,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.truepestilence.mysingingmod.block.ModBlocks;
 import net.truepestilence.mysingingmod.block.entity.ModBlockEntities;
 import net.truepestilence.mysingingmod.entity.ModEntityTypes;
-import net.truepestilence.mysingingmod.entity.client.NogginRenderer;
+import net.truepestilence.mysingingmod.entity.client.*;
 import net.truepestilence.mysingingmod.item.ModItems;
 import net.truepestilence.mysingingmod.networking.ModNetworking;
 import net.truepestilence.mysingingmod.recipe.ModRecipes;
 import net.truepestilence.mysingingmod.screen.BreedingStructureScreen;
+import net.truepestilence.mysingingmod.screen.CastleCoreScreen;
 import net.truepestilence.mysingingmod.screen.ModMenuTypes;
 import net.truepestilence.mysingingmod.screen.NurseryScreen;
 import net.truepestilence.mysingingmod.world.feature.ModConfiguredFeatures;
@@ -71,7 +72,13 @@ public class MySingingMod
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.BREEDING_STRUCTURE.get(), BreedingStructureScreen::new);
             MenuScreens.register(ModMenuTypes.NURSERY.get(), NurseryScreen::new);
+            MenuScreens.register(ModMenuTypes.CASTLE_CORE.get(), CastleCoreScreen::new);
+
+            EntityRenderers.register(ModEntityTypes.MAMMOTT.get(), MammottRenderer::new);
             EntityRenderers.register(ModEntityTypes.NOGGIN.get(), NogginRenderer::new);
+            EntityRenderers.register(ModEntityTypes.POTBELLY.get(), PotbellyRenderer::new);
+            EntityRenderers.register(ModEntityTypes.TOE_JAMMER.get(), ToeJammerRenderer::new);
+            EntityRenderers.register(ModEntityTypes.TWEEDLE.get(), TweedleRenderer::new);
         }
     }
 }

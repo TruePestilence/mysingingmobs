@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.truepestilence.mysingingmod.MySingingMod;
+import net.truepestilence.mysingingmod.item.custom.MonsterSigil;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -37,6 +38,8 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB)));
     public static final RegistryObject<Item> LIFE_FORMULA = ITEMS.register("life_formula",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB).stacksTo(1)));
+    public static final RegistryObject<Item> MONSTER_SIGIL = ITEMS.register("monster_sigil",
+            () -> new MonsterSigil(new Item.Properties().tab(ModCreativeModeTab.MSM_TAB).stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

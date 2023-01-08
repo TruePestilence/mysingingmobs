@@ -17,6 +17,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -24,15 +25,19 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.registries.RegistryObject;
 import net.truepestilence.mysingingmod.MySingingMod;
+import net.truepestilence.mysingingmod.block.ModBlocks;
+import net.truepestilence.mysingingmod.block.custom.BreedingStructure;
+import net.truepestilence.mysingingmod.item.ModItems;
+import net.truepestilence.mysingingmod.networking.ModNetworking;
+import net.truepestilence.mysingingmod.networking.packet.ItemStackSyncS2CPacket;
 import net.truepestilence.mysingingmod.recipe.BreedingStructureRecipe;
 import net.truepestilence.mysingingmod.screen.BreedingStructureMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 
 public class BreedingStructureEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
@@ -40,7 +45,30 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
         protected void onContentsChanged(int slot) {
             setChanged();
         }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return switch(slot) {
+                case 0, 1 -> stack.is(ModItems.MONSTER_SIGIL.get());
+                case 2 -> stack.is(monsterTag);
+                default -> super.isItemValid(slot, stack);
+            };
+        }
     };
+
+    private final Map<Direction, LazyOptional<WrappedHandler>> wrappedHandlerMap =
+            Map.of(Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2,
+                    (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack))),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 2,
+                            (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2,
+                            (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2,
+                            (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 2,
+                            (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack))));
+
+    public static final TagKey<Item> monsterTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "all_monsters"));
     public static final TagKey<Item> earthTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "earth_element"));
     public static final TagKey<Item> coldTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "cold_element"));
     public static final TagKey<Item> airTag = ItemTags.create(new ResourceLocation(MySingingMod.MOD_ID, "air_element"));
@@ -106,10 +134,26 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
-        }
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
+            if (side == null) {
+                return lazyItemHandler.cast();
+            }
 
+            if (wrappedHandlerMap.containsKey(side)) {
+                Direction localDir = this.getBlockState().getValue(BreedingStructure.FACING);
+
+                if (side == Direction.UP || side == Direction.DOWN) {
+                    return wrappedHandlerMap.get(side).cast();
+                }
+
+                return switch (localDir) {
+                    default -> wrappedHandlerMap.get(side.getOpposite()).cast();
+                    case EAST -> wrappedHandlerMap.get(side.getClockWise()).cast();
+                    case SOUTH -> wrappedHandlerMap.get(side).cast();
+                    case WEST -> wrappedHandlerMap.get(side.getCounterClockWise()).cast();
+                };
+            }
+        }
         return super.getCapability(cap, side);
     }
 
@@ -153,6 +197,7 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
         if(level.isClientSide()) {
             return;
         }
+        ModNetworking.sendToClients(new ItemStackSyncS2CPacket(pos, entity.itemHandler));
         if(hasRecipe(entity)) {
             entity.progress++;
             setChanged(level, pos, state);
@@ -174,8 +219,13 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
         }
 
         Optional<BreedingStructureRecipe> recipe = level.getRecipeManager().getRecipeFor(BreedingStructureRecipe.Type.INSTANCE, inventory, level);
-        return recipe.isPresent() && canInsertAmount(inventory) &&
-                canInsertItem(inventory, recipe.get().getResultItem());
+        if(recipe.isEmpty()){
+            for (int i = 0; i < 2; i++) {
+                if(inventory.getItem(i).getItem() != ModItems.MONSTER_SIGIL.get()) { return false; }
+                CompoundTag nbt = inventory.getItem(i).getTag();
+                if(nbt == null || !nbt.contains("entity")) { return false; }
+            }
+        } return canInsertItem(inventory);
     }
 
     public static int breedingTime(BreedingStructureEntity entity) {
@@ -187,34 +237,36 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
             } catch(Exception e) {
                 return 0;
             }
-            if(ing.is(earthTag)) { y += 23*15; }
-            if(ing.is(coldTag)) { y += 23*15; }
-            if(ing.is(waterTag)) { y += 23*15; }
-            if(ing.is(plantTag)) { y += 23*15; }
-            if(ing.is(airTag)) { y += 23*15; }
-            if(ing.is(plasmaTag)) { y += 23*45; }
-            if(ing.is(shadowTag)) { y += 23*45; }
-            if(ing.is(mechTag)) { y += 23*45; }
-            if(ing.is(crystalTag)) { y += 23*45; }
-            if(ing.is(poisonTag)) { y += 23*45; }
-            if(ing.is(legendaryTag)) { y *= 23*45; }
-            if(ing.is(mythicalTag)) { y *= 23*45; }
-            if(ing.is(seasonalTag)) { y += 23*60; }
-            if(ing.is(fireTag)) { y += 23*30; }
-            if(ing.is(psychicTag)) { y += 23*45; }
-            if(ing.is(faerieTag)) { y += 23*45; }
-            if(ing.is(lightTag)) { y += 23*45; }
-            if(ing.is(boneTag)) { y += 23*45; }
+            String s = "egg_".concat(ing.getTag().getString("entity").toLowerCase().replace(" ", ""));
+            for (RegistryObject<Block> block : ModBlocks.BLOCKS.getEntries()) {
+                if(block.get().asItem().toString().equals(s)) {
+                    ing = new ItemStack(block.get().asItem(), 1);
+                    if(ing.is(earthTag)) { y += 20*15; }
+                    if(ing.is(coldTag)) { y += 20*15; }
+                    if(ing.is(waterTag)) { y += 20*15; }
+                    if(ing.is(plantTag)) { y += 20*15; }
+                    if(ing.is(airTag)) { y += 20*15; }
+                    if(ing.is(plasmaTag)) { y += 20*45; }
+                    if(ing.is(shadowTag)) { y += 20*45; }
+                    if(ing.is(mechTag)) { y += 20*45; }
+                    if(ing.is(crystalTag)) { y += 20*45; }
+                    if(ing.is(poisonTag)) { y += 20*45; }
+                    if(ing.is(legendaryTag)) { y *= 20*45; }
+                    if(ing.is(mythicalTag)) { y *= 20*45; }
+                    if(ing.is(seasonalTag)) { y += 20*60; }
+                    if(ing.is(fireTag)) { y += 20*30; }
+                    if(ing.is(psychicTag)) { y += 20*45; }
+                    if(ing.is(faerieTag)) { y += 20*45; }
+                    if(ing.is(lightTag)) { y += 20*45; }
+                    if(ing.is(boneTag)) { y += 20*45; }
+                }
+            }
         }
         return y;
     }
 
-    private static boolean canInsertItem(SimpleContainer inventory, ItemStack stack) {
-        return inventory.getItem(2).getItem() == stack.getItem() || inventory.getItem(2).isEmpty();
-    }
-
-    private static boolean canInsertAmount(SimpleContainer inventory) {
-        return inventory.getItem(2).getMaxStackSize() > inventory.getItem(2).getCount();
+    private static boolean canInsertItem(SimpleContainer inventory) {
+        return inventory.getItem(2).isEmpty();
     }
 
     private static void craftItem(BreedingStructureEntity pEntity) {
@@ -223,21 +275,56 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
         for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
         }
-
-        Optional<BreedingStructureRecipe> recipe = level.getRecipeManager()
-                .getRecipeFor(BreedingStructureRecipe.Type.INSTANCE, inventory, level);
-
         if(hasRecipe(pEntity)) {
-            pEntity.itemHandler.extractItem(0, 1, false);
-            pEntity.itemHandler.extractItem(1, 1, false);
-            pEntity.itemHandler.setStackInSlot(2, new ItemStack(recipe.get().getResultItem().getItem(),
-                    pEntity.itemHandler.getStackInSlot(2).getCount() + 1));
-
+            Optional<BreedingStructureRecipe> recipe = level.getRecipeManager()
+                    .getRecipeFor(BreedingStructureRecipe.Type.INSTANCE, inventory, level);
+            if(recipe.isPresent()) {
+                pEntity.itemHandler.setStackInSlot(2, new ItemStack(recipe.get().getResultEgg(), 1));
+            } else {
+                List<String> list = new ArrayList();
+                for(int i = 0; i < 2; i++) {
+                    if(inventory.getItem(i).getTag() != null && inventory.getItem(i).getTag().contains("entity")) {
+                        list.add(inventory.getItem(i).getTag().getString("entity"));
+                    }
+                }
+                pEntity.itemHandler.setStackInSlot(2, new ItemStack(BreedingStructureRecipe.getDefResult(list), 1));
+            }
             pEntity.resetProgress();
         }
     }
 
     private void resetProgress() {
         this.progress = 0;
+    }
+
+    public List<ItemStack> getRenderStacks() {
+        List<ItemStack> list = new ArrayList();
+        for (int i = 0; i < 2; i++) {
+            if (itemHandler.getStackInSlot(i).getTag() != null && itemHandler.getStackInSlot(i).getTag().contains("entity")) {
+                String s = "egg_".concat(itemHandler.getStackInSlot(i).getTag().getString("entity").toLowerCase().replace(" ", ""));
+                for (RegistryObject<Block> block : ModBlocks.BLOCKS.getEntries()) {
+                    if (block.get().asItem().toString().equals(s)) {
+                        list.add(new ItemStack(block.get().asItem(), 1));
+                    }
+                }
+            } else { list.add(ItemStack.EMPTY); }
+        } if (itemHandler.getStackInSlot(2).isEmpty()) {
+            list.add(ItemStack.EMPTY);
+        } else if (itemHandler.getStackInSlot(2).is(monsterTag)) {
+            list.add(itemHandler.getStackInSlot(2));
+        } else {
+            list.add(ItemStack.EMPTY);
+        }
+        return list;
+    }
+
+    public void setHandler(ItemStackHandler itemStackHandler) {
+        for(int i = 0; i < itemStackHandler.getSlots(); i++) {
+            itemHandler.setStackInSlot(i, itemStackHandler.getStackInSlot(i));
+        }
+    }
+
+    public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
+        return pDirection == Direction.DOWN && pIndex == 2;
     }
 }

@@ -24,7 +24,7 @@ public class NurseryMenu extends AbstractContainerMenu {
 
     public NurseryMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.NURSERY.get(), id);
-        checkContainerSize(inv, 3);
+        checkContainerSize(inv, 1);
         blockEntity = (NurseryEntity) entity;
         this.level = inv.player.level;
         this.data = data;
