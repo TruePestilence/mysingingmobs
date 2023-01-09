@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.truepestilence.mysingingmod.MySingingMod;
 
 import java.awt.*;
@@ -20,10 +21,12 @@ public class CastleCoreScreen extends AbstractContainerScreen<CastleCoreMenu> {
             new ResourceLocation(MySingingMod.MOD_ID, "textures/gui/nursery_gui.png");
 
     public int beds;
+    public int bedsUsed;
 
     public CastleCoreScreen(CastleCoreMenu menu, Inventory inv, Component component) {
         super(menu, inv, component);
-        this.beds = menu.data.get(0);
+        this.beds = menu.blockEntity.beds;
+        this.bedsUsed = menu.blockEntity.bedsUsed;
     }
 
     @Override
@@ -49,7 +52,7 @@ public class CastleCoreScreen extends AbstractContainerScreen<CastleCoreMenu> {
         renderTooltip(stack, mouseX, mouseY);
         int x = (width) / 2;
         int y = ((height - imageHeight) / 2) + floor(imageHeight / 2.75);
-        String text = "Beds: ".concat(Integer.toString(this.beds));
+        String text = "Beds: ".concat(Integer.toString(this.bedsUsed)).concat("/").concat(Integer.toString(this.beds));
         this.font.drawWordWrap(FormattedText.of(text),(x - font.width(text) / 2),y,2048,0xFF202020);
     }
 }

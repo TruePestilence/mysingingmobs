@@ -73,7 +73,7 @@
     {"id": "mysingingmod:egg_sneyser", "required": false},
     {"id": "mysingingmod:egg_sneyser_rare", "required": false},
     {"id": "mysingingmod:egg_flumox", "required": false},
-    {"id": "mysingingmod:egg_bisonorous", "required": false},
+    {"id": "mysingingmod:egg_bisonorus", "required": false},
     {"id": "mysingingmod:egg_edamimi", "required": false},
     {"id": "mysingingmod:egg_incisaur", "required": false},
     {"id": "mysingingmod:egg_tiawa", "required": false},

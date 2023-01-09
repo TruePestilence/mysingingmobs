@@ -28,15 +28,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.truepestilence.mysingingmod.MySingingMod;
 import net.truepestilence.mysingingmod.block.custom.CastleCore;
 import net.truepestilence.mysingingmod.screen.CastleCoreMenu;
-import net.truepestilence.mysingingmod.screen.NurseryMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CastleCoreEntity extends BlockEntity implements MenuProvider {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -44,8 +44,11 @@ public class CastleCoreEntity extends BlockEntity implements MenuProvider {
     };
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     protected final ContainerData data;
-    private int beds = 5;
+    public int beds = 5;
+    public int bedsUsed = 0;
+    public int age = -2147483648;
     private List<Entity> monsters = new ArrayList<>();
+    private List<BlockEntity> machines = new ArrayList<>();
     private final Direction facing;
 
     public CastleCoreEntity(BlockPos pos, BlockState state) {
@@ -56,6 +59,8 @@ public class CastleCoreEntity extends BlockEntity implements MenuProvider {
             public int get(int index) {
                 return switch (index) {
                     case 0 -> CastleCoreEntity.this.beds;
+                    case 1 -> CastleCoreEntity.this.bedsUsed;
+                    case 2 -> CastleCoreEntity.this.age;
                     default -> 0;
                 };
             }
@@ -64,6 +69,8 @@ public class CastleCoreEntity extends BlockEntity implements MenuProvider {
             public void set(int index, int value) {
                 switch (index) {
                     case 0 -> CastleCoreEntity.this.beds = value;
+                    case 1 -> CastleCoreEntity.this.bedsUsed = value;
+                    case 2 -> CastleCoreEntity.this.age = value;
                 }
             }
 
@@ -78,7 +85,6 @@ public class CastleCoreEntity extends BlockEntity implements MenuProvider {
     public Component getDisplayName() {
         return Component.literal("Castle Core");
     }
-
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
@@ -110,6 +116,8 @@ public class CastleCoreEntity extends BlockEntity implements MenuProvider {
     protected void saveAdditional(CompoundTag nbt) {
         nbt.put("inventory", itemHandler.serializeNBT());
         nbt.putInt("castle_core.beds", this.beds);
+        nbt.putInt("castle_core.bedsUsed", this.bedsUsed);
+        nbt.putInt("castle_core.age", this.age);
 
         super.saveAdditional(nbt);
     }
@@ -119,6 +127,8 @@ public class CastleCoreEntity extends BlockEntity implements MenuProvider {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         beds = nbt.getInt("castle_core.beds");
+        bedsUsed = nbt.getInt("castle_core.bedsUsed");
+        age = nbt.getInt("castle_core.age");
     }
 
     public void drops() {
@@ -134,11 +144,31 @@ public class CastleCoreEntity extends BlockEntity implements MenuProvider {
         if(level.isClientSide()) {
             return;
         }
+        entity.age++;
         int chunkPosX = pos.getX() >> 4;
         int chunkPosZ = pos.getZ() >> 4;
+        for (int x = chunkPosX - 16; x < chunkPosX + 16; x++) {
+            for (int z = chunkPosZ - 16; z < chunkPosZ + 16; z++) {
+                LevelChunk currentChunk = level.getChunk(x, z);
+                Map<BlockPos, BlockEntity> map = currentChunk.getBlockEntities();
+                for(BlockPos p : map.keySet()) {
+                    if(map.get(p) instanceof CastleCoreEntity && p != pos) {
+                        if(((CastleCoreEntity) map.get(p)).age <= entity.age) {
+                            level.destroyBlock(p, true);
+                        } else {
+                            level.destroyBlock(pos, true);
+                        }
+                    } else if(map.get(p) instanceof BreedingStructureEntity || map.get(p) instanceof NurseryEntity) {
+                        if(!entity.machines.contains(map.get(p))) {
+                            entity.machines.add(map.get(p));
+                        }
+                    }
+                }
+            }
+        }
         for (int x = chunkPosX - 8; x < chunkPosX + 8; x++) {
             for (int z = chunkPosZ - 8; z < chunkPosZ + 8; z++) {
-                LevelChunk currentChunk = level.getChunk(chunkPosX, chunkPosZ);
+                LevelChunk currentChunk = level.getChunk(x, z);
                 BlockPos chunk = currentChunk.getPos().getWorldPosition();
                 List<Entity> ent = level.getEntities(null, new AABB(chunk.getX(), pos.getY() + 64, chunk.getZ(), chunk.getX() + 16, pos.getY() - 64, chunk.getZ() + 16));
                 EntityType type;
@@ -146,20 +176,49 @@ public class CastleCoreEntity extends BlockEntity implements MenuProvider {
                     try { type = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(MySingingMod.MOD_ID, i)); }
                     catch (Exception e) {
                        type = null;
-                    } for(Entity e : ent) {
-                        if(e.getType() == type) {
-                            if(!entity.monsters.contains(e)) {
-                                entity.monsters.add(e);
+                    }
+                    if(type != null && type != EntityType.PIG) {
+                        for (Entity e : ent) {
+                            if (e.getType() == type) {
+                                if (!entity.monsters.contains(e)) {
+                                    entity.monsters.add(e);
+                                }
                             }
                         }
                     }
                 }
             }
         }
+        entity.bedsUsed = entity.monsters.size();
+        for(BlockEntity e : entity.machines) {
+            if(entity.bedsUsed >= entity.beds) {
+                if(e instanceof BreedingStructureEntity) {
+                    ((BreedingStructureEntity) e).active = false;
+                } else if (e instanceof NurseryEntity) {
+                    ((NurseryEntity) e).active = false;
+                }
+            } else {
+                if(e instanceof BreedingStructureEntity) {
+                    ((BreedingStructureEntity) e).active = true;
+                } else if (e instanceof NurseryEntity) {
+                    ((NurseryEntity) e).active = true;
+                }
+            }
+        }
+    }
+
+    public void deactivate() {
+        for(BlockEntity e : this.machines) {
+            if(e instanceof BreedingStructureEntity) {
+                ((BreedingStructureEntity) e).active = false;
+            } else if (e instanceof NurseryEntity) {
+                ((NurseryEntity) e).active = false;
+            }
+        }
     }
 
     public static List<String> getMonsters() {
-        List<String> list = new ArrayList();
+        List<String> list = new ArrayList<>();
         list.add("noggin");
         list.add("noggin_rare");
         list.add("noggin_epic");
@@ -306,7 +365,7 @@ public class CastleCoreEntity extends BlockEntity implements MenuProvider {
         list.add("yelmut");
         list.add("yelmut_rare");
         list.add("flumox");
-        list.add("bisonorous");
+        list.add("bisonorus");
         list.add("incisaur");
         list.add("edamimi");
         list.add("tiawa");

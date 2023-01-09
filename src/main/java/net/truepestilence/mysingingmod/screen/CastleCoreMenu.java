@@ -13,19 +13,21 @@ import net.truepestilence.mysingingmod.block.ModBlocks;
 import net.truepestilence.mysingingmod.block.entity.CastleCoreEntity;
 import net.truepestilence.mysingingmod.block.entity.NurseryEntity;
 
+import java.util.Objects;
+
 public class CastleCoreMenu extends AbstractContainerMenu {
     public final CastleCoreEntity blockEntity;
     public final Level level;
     public final ContainerData data;
 
     public CastleCoreMenu(int id, Inventory inv, FriendlyByteBuf data) {
-        this(id, inv, inv.player.level.getBlockEntity(data.readBlockPos()), new SimpleContainerData(2));
+        this(id, inv, inv.player.level.getBlockEntity(data.readBlockPos()), new SimpleContainerData(1));
     }
 
     public CastleCoreMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.CASTLE_CORE.get(), id);
         checkContainerSize(inv, 1);
-        blockEntity = (CastleCoreEntity) entity;
+        this.blockEntity = (CastleCoreEntity) entity;
         this.level = inv.player.level;
         this.data = data;
 
@@ -39,6 +41,7 @@ public class CastleCoreMenu extends AbstractContainerMenu {
         addDataSlots(data);
     }
 
+
     private static final int HOTBAR_SLOT_COUNT = 9;
     private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
     private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
@@ -46,7 +49,7 @@ public class CastleCoreMenu extends AbstractContainerMenu {
     private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player player, int index) {

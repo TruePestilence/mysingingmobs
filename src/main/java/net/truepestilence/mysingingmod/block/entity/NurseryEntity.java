@@ -68,6 +68,7 @@ public class NurseryEntity extends BlockEntity implements MenuProvider {
     private int progress = 0;
     private int maxProgress = 60;
     private final Direction facing;
+    protected boolean active = false;
 
     public NurseryEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.NURSERY.get(), pos, state);
@@ -133,6 +134,7 @@ public class NurseryEntity extends BlockEntity implements MenuProvider {
     protected void saveAdditional(CompoundTag nbt) {
         nbt.put("inventory", itemHandler.serializeNBT());
         nbt.putInt("nursery.progress", this.progress);
+        nbt.putBoolean("nursery.active", this.active);
 
         super.saveAdditional(nbt);
     }
@@ -142,6 +144,7 @@ public class NurseryEntity extends BlockEntity implements MenuProvider {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         progress = nbt.getInt("nursery.progress");
+        active = nbt.getBoolean("nursery.active");
     }
 
     public void drops() {
@@ -162,7 +165,7 @@ public class NurseryEntity extends BlockEntity implements MenuProvider {
             entity.progress++;
             setChanged(level, pos, state);
             entity.maxProgress = getIncTime(entity.itemHandler.getStackInSlot(0));
-            if(entity.progress >= entity.maxProgress) {
+            if(entity.progress >= entity.maxProgress && entity.active) {
                 craftItem(entity, pos);
             }
         } else {

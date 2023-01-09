@@ -66,6 +66,7 @@ public class CastleCore extends BaseEntityBlock {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if(blockEntity instanceof CastleCoreEntity) {
                 ((CastleCoreEntity) blockEntity).drops();
+                ((CastleCoreEntity) blockEntity).deactivate();
             }
         }
         super.onRemove(state, level, pos, newState, isMoving);

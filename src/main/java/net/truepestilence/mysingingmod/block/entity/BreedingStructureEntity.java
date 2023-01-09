@@ -92,7 +92,8 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 69;
+    private int maxProgress = 60;
+    protected boolean active = false;
 
     public BreedingStructureEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BREEDING_STRUCTURE.get(), pos, state);
@@ -173,6 +174,7 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
     protected void saveAdditional(CompoundTag nbt) {
         nbt.put("inventory", itemHandler.serializeNBT());
         nbt.putInt("breeding_structure.progress", this.progress);
+        nbt.putBoolean("breeding_structure.active", this.active);
 
         super.saveAdditional(nbt);
     }
@@ -182,6 +184,7 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         progress = nbt.getInt("breeding_structure.progress");
+        active = nbt.getBoolean("breeding_structure.active");
     }
 
     public void drops() {
@@ -212,20 +215,27 @@ public class BreedingStructureEntity extends BlockEntity implements MenuProvider
         }
     }
     private static <T> boolean hasRecipe(BreedingStructureEntity entity) {
-        Level level = entity.level;
-        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
-        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
-        }
-
-        Optional<BreedingStructureRecipe> recipe = level.getRecipeManager().getRecipeFor(BreedingStructureRecipe.Type.INSTANCE, inventory, level);
-        if(recipe.isEmpty()){
-            for (int i = 0; i < 2; i++) {
-                if(inventory.getItem(i).getItem() != ModItems.MONSTER_SIGIL.get()) { return false; }
-                CompoundTag nbt = inventory.getItem(i).getTag();
-                if(nbt == null || !nbt.contains("entity")) { return false; }
+        if(entity.active) {
+            Level level = entity.level;
+            SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
+            for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
+                inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
             }
-        } return canInsertItem(inventory);
+
+            Optional<BreedingStructureRecipe> recipe = level.getRecipeManager().getRecipeFor(BreedingStructureRecipe.Type.INSTANCE, inventory, level);
+            if (recipe.isEmpty()) {
+                for (int i = 0; i < 2; i++) {
+                    if (inventory.getItem(i).getItem() != ModItems.MONSTER_SIGIL.get()) {
+                        return false;
+                    }
+                    CompoundTag nbt = inventory.getItem(i).getTag();
+                    if (nbt == null || !nbt.contains("entity")) {
+                        return false;
+                    }
+                }
+            }
+            return canInsertItem(inventory);
+        } else { return false; }
     }
 
     public static int breedingTime(BreedingStructureEntity entity) {

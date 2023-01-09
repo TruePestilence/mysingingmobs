@@ -70,7 +70,7 @@
     {"id": "mysingingmod:egg_krillby", "required": false},
     {"id": "mysingingmod:egg_yelmut", "required": false},
     {"id": "mysingingmod:egg_yelmut_rare", "required": false},
-    {"id": "mysingingmod:egg_bisonorous", "required": false},
+    {"id": "mysingingmod:egg_bisonorus", "required": false},
 
     {"id": "mysingingmod:egg_candelavra", "required": false},
     {"id": "mysingingmod:egg_drummidary", "required": false}
